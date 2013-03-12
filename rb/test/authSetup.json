@@ -1,0 +1,25 @@
+{
+    "roles":
+        [
+            {"admin":["reader","writer"]},
+            {"economics":["reader","writer"]},
+            {"user":[]}
+        ],
+    "userroles":
+        [
+            {"haho":[{"user":["*"]},{"economics":["*"]},{"admin":["*"]}]},
+            {"test1":[{"user":["*"]},{"economics":["reader"]}]},
+            {"test2":[{"user":["*"]},{"economics":["writer"]}]},
+            {"test3":[{"user":["*"]},{"admin":["reader"]},{"economics":["*"]}]},
+            {"test4":[{"admin":["reader"]},{"economics":["*"]}]}
+        ],
+    "matchrules":
+        [
+            {"*":[{"user":["*"]}]},
+            {"/admin*":[{"admin":["*"]}]},
+            {"/admin/setup/*":[{"admin":["writer"]}]},
+            {"/economics/*.html":[{"economics":["*"]}]},
+            {"/economics/setup/*":[{"economics":["writer"]}]},
+            {"/about":[{"economics":["*"]},{"admin":["*"]}]}
+        ]
+}

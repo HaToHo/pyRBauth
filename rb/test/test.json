@@ -1,0 +1,14 @@
+{
+    "roles":
+        [
+            {"admin":["reader","writer"]},
+            {"economics":["reader","writer"]},
+            {"user":[]}
+        ],
+    "userroles":
+        [
+            {"haho":[{"user":["*"]},{"economics":["*"]},{"admin":["*"]}]},
+            {"test1":[{"user":["*"]},{"economics":["reader"]}]},
+            {"test2":[{"user":["*"]},{"economics":["writer"]}]}
+        ]
+}
