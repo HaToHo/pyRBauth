@@ -1,12 +1,12 @@
 from distutils.core import setup
 
 setup(
-    name='Calculations',
+    name='pyRBauth',
     version='0.1',
-    packages=['Arithmetic', 'Arithmetic.Advanced'],
+    packages=['rb'],
     url='',
     license='LICENSE.txt',
     author='Hans Hoerberg',
-    author_email='hans@sektor.se',
-    description='Collection of calculations.'
+    author_email='hans.horberg@umu.se',
+    description='Declarative security.'
 )
