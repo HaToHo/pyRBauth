@@ -3,11 +3,21 @@ import json
 import re
 
 class DeclarativeAuth:
+    """
+        The class handles declarative authorizations on strings.
+
+        The class takes a JSON file that must have a specific structure. Read more in README.txt.
+
+
+    """
     #Contains the singleton
     _instance = None
 
+    #Dictionary key in the JSON file for all roles.
     CONST_ROLES = "roles"
+    #Dictionary key in the JSON file for the roles a user posses.
     CONST_USERROLES = "userroles"
+    #Dictionary key in the JSON file for all the rules."
     CONST_MATCHRULES = "matchrules"
     CONST_ALL = "*"
 
@@ -66,11 +76,12 @@ class DeclarativeAuth:
     def findItemInList(list, key):
         """
         Help class that searches for a key in a list with dictionaries.
-        If the key exists in one dictionary the methods returns the item form the key, otherwise none.
-        :rtype : Object
+        If the key exists in one dictionary the methods returns the dictionary that contains the key, otherwise none.
+
+        :rtype : dict
         :param list: A list with dictionaries.
         :param key: A string key.
-        :return: Object for the key if the key exists, otherwise None.
+        :return: The first dict that contains the key, otherwise None.
         """
         for item in list:
             if key in item:
@@ -82,6 +93,8 @@ class DeclarativeAuth:
     def matchRoles(roleMaster, roleMatch):
         """
         Matches two roles with each other.
+
+        :rtype: bool
         :param roleMaster: The role to be match.
         :param roleMatch: The role to match.
         :return: True if the two roles match eachother, otherwise false.
@@ -158,6 +171,8 @@ class DeclarativeAuth:
     def userInRole(self, user, role):
         """
         Verifies if a user is in specific role.
+
+        :rtype: bool
         :param user: The user
         :param role: The role
         :return: True if the user have the given role.
@@ -171,10 +186,18 @@ class DeclarativeAuth:
         return False
 
     def userMatchRule(self, rule, user):
+        """
+
+
+        :rtype : bool
+        :param rule:
+        :param user:
+        :return:
+        """
         ruleOK = True
         for tmprule in self.authSetup[self.CONST_MATCHRULES]:
             ruleKey = tmprule.keys()[0]
-            if re.match(ruleKey.replace("*",".*"),rule):
+            if re.match(ruleKey,rule): #.replace("*",".*")
                 ruleOK = False
                 if self.ruleExists(ruleKey):
                     ruleRoles = self.findItemInList(self.authSetup[self.CONST_MATCHRULES], ruleKey)
