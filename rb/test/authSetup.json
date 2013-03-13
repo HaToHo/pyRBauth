@@ -15,11 +15,11 @@
         ],
     "matchrules":
         [
-            {"*":[{"user":["*"]}]},
-            {"/admin*":[{"admin":["*"]}]},
-            {"/admin/setup/*":[{"admin":["writer"]}]},
-            {"/economics/*.html":[{"economics":["*"]}]},
-            {"/economics/setup/*":[{"economics":["writer"]}]},
+            {".*":[{"user":["*"]}]},
+            {"/admin.*":[{"admin":["*"]}]},
+            {"/admin/setup/.*":[{"admin":["writer"]}]},
+            {"/economics/.*.html":[{"economics":["*"]}]},
+            {"/economics/setup/.*":[{"economics":["writer"]}]},
             {"/about":[{"economics":["*"]},{"admin":["*"]}]}
         ]
 }

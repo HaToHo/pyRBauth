@@ -63,25 +63,61 @@ class RuleRoleTest(unittest.TestCase):
         filename = os.path.dirname(os.path.abspath(__file__))+"/authSetup.json"
         dAuth = DeclarativeAuth.getInstance(filename)
 
-        self.assertFalse(dAuth.userMatchRule("/anypage","test4"), '')
 
+        self.assertTrue(dAuth.userMatchRule("/anypage","haho"), '')
         self.assertTrue(dAuth.userMatchRule("/admin/anypage","haho"), '')
         self.assertTrue(dAuth.userMatchRule("/admin","haho"), '')
-        self.assertTrue(dAuth.userMatchRule("/admin/setup","haho"), '')
+        self.assertTrue(dAuth.userMatchRule("/admin/setup/","haho"), '')
         self.assertTrue(dAuth.userMatchRule("/admin/setup/anypage","haho"), '')
         self.assertTrue(dAuth.userMatchRule("/economics/test.html","haho"), '')
         self.assertTrue(dAuth.userMatchRule("/economics/setup/anypage","haho"), '')
         self.assertTrue(dAuth.userMatchRule("/economics/setup/","haho"), '')
         self.assertTrue(dAuth.userMatchRule("/about","haho"), '')
 
+        #Verify that the singleton pattern really works.
+        dAuth = DeclarativeAuth.getInstance()
+
+        self.assertTrue(dAuth.userMatchRule("/anypage","test1"), '')
         self.assertFalse(dAuth.userMatchRule("/admin/anypage","test1"), '')
         self.assertFalse(dAuth.userMatchRule("/admin","test1"), '')
-        self.assertFalse(dAuth.userMatchRule("/admin/setup","test1"), '')
+        self.assertFalse(dAuth.userMatchRule("/admin/setup/","test1"), '')
         self.assertFalse(dAuth.userMatchRule("/admin/setup/anypage","test1"), '')
         self.assertTrue(dAuth.userMatchRule("/economics/test.html","test1"), '')
         self.assertFalse(dAuth.userMatchRule("/economics/setup/anypage","test1"), '')
         self.assertFalse(dAuth.userMatchRule("/economics/setup/","test1"), '')
         self.assertTrue(dAuth.userMatchRule("/about","test1"), '')
+
+
+        self.assertTrue(dAuth.userMatchRule("/anypage","test2"), '')
+        self.assertFalse(dAuth.userMatchRule("/admin/anypage","test2"), '')
+        self.assertFalse(dAuth.userMatchRule("/admin","test2"), '')
+        self.assertFalse(dAuth.userMatchRule("/admin/setup/","test2"), '')
+        self.assertFalse(dAuth.userMatchRule("/admin/setup/anypage","test2"), '')
+        self.assertTrue(dAuth.userMatchRule("/economics/test.html","test2"), '')
+        self.assertTrue(dAuth.userMatchRule("/economics/setup/anypage","test2"), '')
+        self.assertTrue(dAuth.userMatchRule("/economics/setup/","test2"), '')
+        self.assertTrue(dAuth.userMatchRule("/about","test2"), '')
+
+
+        self.assertTrue(dAuth.userMatchRule("/anypage", "test3"), '')
+        self.assertTrue(dAuth.userMatchRule("/admin/anypage", "test3"), '')
+        self.assertTrue(dAuth.userMatchRule("/admin", "test3"), '')
+        self.assertFalse(dAuth.userMatchRule("/admin/setup/", "test3"), '')
+        self.assertFalse(dAuth.userMatchRule("/admin/setup/anypage", "test3"), '')
+        self.assertTrue(dAuth.userMatchRule("/economics/test.html", "test3"), '')
+        self.assertTrue(dAuth.userMatchRule("/economics/setup/anypage", "test3"), '')
+        self.assertTrue(dAuth.userMatchRule("/economics/setup/", "test3"), '')
+        self.assertTrue(dAuth.userMatchRule("/about","test3"), '')
+
+        self.assertFalse(dAuth.userMatchRule("/anypage", "test4"), '')
+        self.assertFalse(dAuth.userMatchRule("/admin/anypage", "test4"), '')
+        self.assertFalse(dAuth.userMatchRule("/admin", "test4"), '')
+        self.assertFalse(dAuth.userMatchRule("/admin/setup/", "test4"), '')
+        self.assertFalse(dAuth.userMatchRule("/admin/setup/anypage", "test4"), '')
+        self.assertFalse(dAuth.userMatchRule("/economics/test.html", "test4"), '')
+        self.assertFalse(dAuth.userMatchRule("/economics/setup/anypage", "test4"), '')
+        self.assertFalse(dAuth.userMatchRule("/economics/setup/", "test4"), '')
+        self.assertFalse(dAuth.userMatchRule("/about","test4"), '')
 
 
 if __name__ == '__main__':
