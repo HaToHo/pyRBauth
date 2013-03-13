@@ -1,6 +1,6 @@
-===========
+========================================================================================================================
 Declarative authorization with pyRBauth
-===========
+========================================================================================================================
 Declarative authorization to protect resources with string representations.
 
 A string representation can be an URL, but do not have to be.
@@ -8,7 +8,7 @@ A string representation can be an URL, but do not have to be.
 The declarations is perform in a JSON structure and is contained in a file.
 
 How to use
----------------------------
+------------------------------------------------------------------------------------------------------------------------
     First get a new instance of the class with the singleton pattern.
 
     dAuth = DeclarativeAuth.getInstance("./myFileName.json")
@@ -27,7 +27,7 @@ How to use
 
 
 Description of JSON file
----------------------------
+------------------------------------------------------------------------------------------------------------------------
 You may use any name for the JSON file, but should use the file ending .json.
 
 
@@ -102,6 +102,6 @@ So if a user may access /somestring.* but the user do not have access to .*, the
 will be denied since both rules apply.
 
 Example
----------------------------
+------------------------------------------------------------------------------------------------------------------------
 You can se an example of how the authorization is used in the test folder.
 
