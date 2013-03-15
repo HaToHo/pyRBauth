@@ -33,7 +33,6 @@ class DeclarativeAuth:
                     self.authSetup = json.load(fileData)
                 except:
                     print "Not a correct JSON syntax!"
-                print self.authSetup
 
 
 
@@ -185,6 +184,18 @@ class DeclarativeAuth:
                         return True
         return False
 
+    def ruleMatch(self, rule):
+        """
+        Verifies if a rule is configured in the JSON file.
+        :param rule: Any string
+        :return: True if the rule is a match otherwise false.
+        """
+        for tempRule in self.authSetup[self.CONST_MATCHRULES]:
+            ruleKey = tempRule.keys()[0]
+            if re.match(ruleKey, rule):
+                return self.ruleExists(ruleKey)
+        return False
+
     def userMatchRule(self, rule, user):
         """
 
@@ -195,9 +206,9 @@ class DeclarativeAuth:
         :return:
         """
         ruleOK = True
-        for tmprule in self.authSetup[self.CONST_MATCHRULES]:
-            ruleKey = tmprule.keys()[0]
-            if re.match(ruleKey,rule): #.replace("*",".*")
+        for tempRule in self.authSetup[self.CONST_MATCHRULES]:
+            ruleKey = tempRule.keys()[0]
+            if re.match(ruleKey,rule):
                 ruleOK = False
                 if self.ruleExists(ruleKey):
                     ruleRoles = self.findItemInList(self.authSetup[self.CONST_MATCHRULES], ruleKey)
@@ -209,6 +220,6 @@ class DeclarativeAuth:
                             for userRole in userRoles:
                                 if self.matchRoles(ruleRole, userRole):
                                     ruleOK = True
-            if ruleOK == False:
+            if not ruleOK:
                 return False
         return ruleOK
